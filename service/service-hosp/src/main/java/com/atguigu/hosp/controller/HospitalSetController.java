@@ -2,15 +2,20 @@ package com.atguigu.hosp.controller;
 
 
 import com.atguigu.common.result.Result;
+import com.atguigu.common.result.ResultCodeEnum;
 import com.atguigu.hosp.service.HospitalSetService;
+import com.atguigu.yygh.common.util.MD5;
 import com.atguigu.yygh.model.hosp.HospitalSet;
 import com.atguigu.yygh.vo.hosp.HospitalSetQueryVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.beans.BeanUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Random;
 
 @CrossOrigin
 @RestController
@@ -18,13 +23,6 @@ import javax.annotation.Resource;
 public class HospitalSetController {
     @Resource
     private HospitalSetService hospitalSetService;
-
-    @GetMapping("")
-    public Result getHospitalSetInfo(String id) {
-        HospitalSet hospitalSet = hospitalSetService.getById(id);
-        return Result.success();
-    }
-
 
     @PostMapping("/{current}/{limit}")
     public Result findAllHospitalSet(@PathVariable Integer current,
@@ -44,5 +42,56 @@ public class HospitalSetController {
         }
         page = hospitalSetService.page(page, qw);
         return Result.success(page);
+    }
+
+
+    @DeleteMapping("/{id}")
+    public Result deleteHospSet(@PathVariable Integer id) {
+
+        boolean deleteOrNot = hospitalSetService.removeById(id);
+        if (deleteOrNot) {
+            return Result.success();
+        }
+        return Result.fail();
+    }
+
+    @DeleteMapping("batchRemove")
+    public Result deleteByList(@RequestBody List<Integer> idList) {
+        boolean deleteOrNot = hospitalSetService.removeByIds(idList);
+        if (deleteOrNot) {
+            return Result.success();
+        }
+        return Result.fail();
+    }
+
+    @PutMapping("/lockHospitalSet/{id}/{status}")
+    public Result lockStatus(@PathVariable Integer id,
+                             @PathVariable Integer status) {
+        if (status != 1 && status != 0) {
+            return Result.build(null, ResultCodeEnum.PARAM_ERROR);
+        }
+        HospitalSet hospitalSet = new HospitalSet();
+        hospitalSet.setStatus(status);
+        hospitalSet.setId(id.longValue());
+        boolean updateById = hospitalSetService.updateById(hospitalSet);
+        if (updateById) {
+            return Result.success();
+        }
+        return Result.fail();
+    }
+
+    @PostMapping("/saveHospitalSet")
+    public Result saveHospSet(@RequestBody HospitalSet hospitalSet) {
+        if (hospitalSet == null) {
+            return Result.build(null, ResultCodeEnum.PARAM_ERROR);
+        }
+        hospitalSet.setStatus(1);
+        Random random = new Random();
+        hospitalSet.setSignKey(MD5.encrypt(System.currentTimeMillis() + "" + random.nextInt(1000)));
+        boolean saveOrNot = hospitalSetService.save(hospitalSet);
+        if (saveOrNot) {
+            return Result.success();
+        }
+        return Result.fail();
     }
 }
