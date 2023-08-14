@@ -13,10 +13,12 @@ spring:
     active: dev
     #数据源
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.204.129:3306/yygh_hosp?characterEncoding=utf-8&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.204.129:3306/yygh_hosp?characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: 123
+    password: 123456
+
+
     #全局时间格式
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -24,5 +26,6 @@ spring:
 
     #mapper位置
 mybatis-plus:
-  mapper-locations:classpath:/com/atguigu/hosp/mapper/xml/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
