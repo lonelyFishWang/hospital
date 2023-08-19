@@ -1,0 +1,15 @@
+server:
+  port: 8021
+
+spring:
+  application:
+    name: service-cmn
+  datasource:
+    username: root
+    url: jdbc:mysql://192.168.204.129:3306/yygh_cmn?characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
