@@ -3,6 +3,7 @@ package com.atguigu.cmn.service.impl;
 import com.alibaba.excel.EasyExcel;
 import com.atguigu.cmn.mapper.DictMapper;
 import com.atguigu.cmn.service.DictService;
+import com.atguigu.cmn.util.ExcelLisoner;
 import com.atguigu.yygh.model.cmn.Dict;
 import com.atguigu.yygh.vo.cmn.DictEeVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -10,6 +11,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -43,7 +45,6 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
     //   执行导出
     @Override
     public boolean exprotExcel(HttpServletResponse response) {
-        boolean result = true;
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf8");
         String fileName = "dict";
@@ -58,14 +59,26 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
             dictEeVos.add(dictEeVo);
         });
         try {
-            EasyExcel.write(response.getOutputStream(), DictEeVo.class).sheet().doWrite(dictEeVos);
+            EasyExcel.write(response.getOutputStream(), DictEeVo.class).sheet("dict").doWrite(dictEeVos);
+            return true;
         } catch (IOException e) {
-
             throw new RuntimeException(e);
         }
+    }
 
 
-        return result;
+//    导入excle
+    @Override
+    public boolean importExcel(MultipartFile file) {
+
+        String contentType = file.getContentType();
+
+            try {
+                EasyExcel.read(file.getInputStream(), DictEeVo.class, new ExcelLisoner());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        return false;
     }
 
     //   是否包含子节点

@@ -6,8 +6,10 @@ import com.atguigu.common.result.Result;
 import com.atguigu.yygh.model.cmn.Dict;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -34,6 +36,16 @@ public class DictController {
 
       boolean successOrNot = dictService.exprotExcel(response);
 
-        return null;
+      if (successOrNot){
+          return Result.success();
+      }
+      return Result.fail();
+    }
+
+    @PostMapping("/")
+    public Result importExcel(MultipartFile file){
+
+
+        dictService.importExcel(file);
     }
 }
