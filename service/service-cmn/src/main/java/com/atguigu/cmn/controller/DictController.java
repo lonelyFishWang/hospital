@@ -4,17 +4,15 @@ package com.atguigu.cmn.controller;
 import com.atguigu.cmn.service.DictService;
 import com.atguigu.common.result.Result;
 import com.atguigu.yygh.model.cmn.Dict;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Slf4j
+@CrossOrigin
 @RestController
 @RequestMapping("/admin/cmn/dict")
 public class DictController {
@@ -24,13 +22,18 @@ public class DictController {
 
     @GetMapping("/findChildData/{id}")
     public Result getDictList(@PathVariable Long id) {
-        QueryWrapper<Dict> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("parent_id", id);
-        List<Dict> dicts = dictService.list(queryWrapper);
-
-        if (dicts.size() == 0){
-            return Result.fail();
-        }
+//        dictServic是一个指向另一个指令的地址 并且执行findDictChildren指令并且把数据id传给这个指令
+        List<Dict> dicts = dictService.findDictChildren(id);
         return Result.success(dicts);
+    }
+
+//    导出为excel
+
+    @GetMapping("/")
+    public Result exprotExcel(HttpServletResponse response){
+
+      boolean successOrNot = dictService.exprotExcel(response);
+
+        return null;
     }
 }
