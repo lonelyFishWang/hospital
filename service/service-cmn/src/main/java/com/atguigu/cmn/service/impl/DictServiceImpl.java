@@ -25,6 +25,9 @@ import java.util.List;
 public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements DictService {
 
     @Resource
+    private DictMapper dictMapper;
+
+    @Resource
     private BaseMapper<Dict> baseMapper;
 
     // 这个指令集合 中还有指令分支
@@ -44,7 +47,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 
     //   执行导出
     @Override
-    public boolean exprotExcel(HttpServletResponse response) {
+    public void exprotExcel(HttpServletResponse response) {
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf8");
         String fileName = "dict";
@@ -58,11 +61,13 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
             BeanUtils.copyProperties(dict, dictEeVo);
             dictEeVos.add(dictEeVo);
         });
+
         try {
+
+//            这个代表把数据写入到response对象的输出流中
             EasyExcel.write(response.getOutputStream(), DictEeVo.class).sheet("dict").doWrite(dictEeVos);
-            return true;
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
@@ -70,11 +75,9 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 //    导入excle
     @Override
     public boolean importExcel(MultipartFile file) {
-
-        String contentType = file.getContentType();
-
             try {
-                EasyExcel.read(file.getInputStream(), DictEeVo.class, new ExcelLisoner());
+//                excelLisoner负责解析excel 从file 输入流中拿到excel
+                EasyExcel.read(file.getInputStream(), DictEeVo.class, new ExcelLisoner(dictMapper)).sheet().doRead();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

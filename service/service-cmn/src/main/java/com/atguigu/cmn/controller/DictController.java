@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -31,21 +30,18 @@ public class DictController {
 
 //    导出为excel
 
-    @GetMapping("/")
-    public Result exprotExcel(HttpServletResponse response){
+    @GetMapping("/exportData")
+    public void exprotExcel(HttpServletResponse response){
+      dictService.exprotExcel(response);
 
-      boolean successOrNot = dictService.exprotExcel(response);
-
-      if (successOrNot){
-          return Result.success();
-      }
-      return Result.fail();
     }
 
-    @PostMapping("/")
+    @PostMapping("/importData")
     public Result importExcel(MultipartFile file){
-
-
-        dictService.importExcel(file);
+        boolean success = dictService.importExcel(file);
+        if (success){
+            return Result.success();
+        }
+        return Result.fail();
     }
 }
