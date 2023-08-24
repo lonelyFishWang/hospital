@@ -4,16 +4,21 @@ import com.alibaba.excel.EasyExcel;
 import com.atguigu.cmn.mapper.DictMapper;
 import com.atguigu.cmn.service.DictService;
 import com.atguigu.cmn.util.ExcelLisoner;
+import com.atguigu.yygh.common.util.RedisUtil;
 import com.atguigu.yygh.model.cmn.Dict;
 import com.atguigu.yygh.vo.cmn.DictEeVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.crypto.KeyGenerator;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,9 +35,21 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
     @Resource
     private BaseMapper<Dict> baseMapper;
 
+    @Resource
+    private RedisUtil redisUtil;
+
+
+    @Autowired
+    private KeyGenerator keyGenerator;
+
     // 这个指令集合 中还有指令分支
     @Override
+    @Cacheable("")
     public List<Dict> findDictChildren(Long id) {
+
+        //        先去redis中取
+
+
 //        创建一个指针指向qw 用于掉哟个qw中的指令
         QueryWrapper<Dict> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("parent_id", id);

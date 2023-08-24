@@ -23,6 +23,7 @@ public class DictController {
 
     @GetMapping("/findChildData/{id}")
     public Result getDictList(@PathVariable Long id) {
+
 //        dictServic是一个指向另一个指令的地址 并且执行findDictChildren指令并且把数据id传给这个指令
         List<Dict> dicts = dictService.findDictChildren(id);
         return Result.success(dicts);

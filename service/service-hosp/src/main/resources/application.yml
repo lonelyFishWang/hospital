@@ -2,7 +2,7 @@
 
 #服务器端口
 server:
-  port: 8021
+  port: 8201
 
 #应用名
 spring:
