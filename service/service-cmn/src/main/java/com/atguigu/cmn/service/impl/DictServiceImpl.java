@@ -11,14 +11,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.crypto.KeyGenerator;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,13 +34,9 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
     @Resource
     private RedisUtil redisUtil;
 
-
-    @Autowired
-    private KeyGenerator keyGenerator;
-
     // 这个指令集合 中还有指令分支
     @Override
-    @Cacheable("")
+//    @Cacheable("")
     public List<Dict> findDictChildren(Long id) {
 
         //        先去redis中取

@@ -24,7 +24,12 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
 
-    #mapper位置
+   # mongodb 数据库
+  data:
+    mongodb:
+      uri: mongodb://192.168.204.129:27017/yygh_hosp
+
+      #mapper位置
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
