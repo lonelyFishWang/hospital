@@ -75,7 +75,7 @@ public class HttpRequestHelper {
      * @return
      */
     public static long getTimestamp() {
-        return new Date().getTime();
+        return System.currentTimeMillis();
     }
 
     /**
