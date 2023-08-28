@@ -4,5 +4,7 @@ import java.util.Map;
 
 public interface HospitalService {
 
-   void saveHospital(Map paramMap);
+   void saveHospital(Map<String,Object> paramMap);
+
+
 }

@@ -39,7 +39,7 @@ public class HospitalSetController {
             }
         }
         page = hospitalSetService.page(page, qw);
-        return Result.success(page);
+        return Result.ok(page);
     }
 
 
@@ -48,7 +48,7 @@ public class HospitalSetController {
 
         boolean deleteOrNot = hospitalSetService.removeById(id);
         if (deleteOrNot) {
-            return Result.success();
+            return Result.ok();
         }
         return Result.fail();
     }
@@ -57,7 +57,7 @@ public class HospitalSetController {
     public Result deleteByList(@RequestBody List<Integer> idList) {
         boolean deleteOrNot = hospitalSetService.removeByIds(idList);
         if (deleteOrNot) {
-            return Result.success();
+            return Result.ok();
         }
         return Result.fail();
     }
@@ -73,7 +73,7 @@ public class HospitalSetController {
         hospitalSet.setId(id.longValue());
         boolean updateById = hospitalSetService.updateById(hospitalSet);
         if (updateById) {
-            return Result.success();
+            return Result.ok();
         }
         return Result.fail();
     }
@@ -88,7 +88,7 @@ public class HospitalSetController {
         hospitalSet.setSignKey(MD5.encrypt(System.currentTimeMillis() + "" + random.nextInt(1000)));
         boolean saveOrNot = hospitalSetService.save(hospitalSet);
         if (saveOrNot) {
-            return Result.success();
+            return Result.ok();
         }
         return Result.fail();
     }

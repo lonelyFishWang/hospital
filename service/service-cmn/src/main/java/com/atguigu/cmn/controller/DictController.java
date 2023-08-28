@@ -26,7 +26,7 @@ public class DictController {
 
 //        dictServic是一个指向另一个指令的地址 并且执行findDictChildren指令并且把数据id传给这个指令
         List<Dict> dicts = dictService.findDictChildren(id);
-        return Result.success(dicts);
+        return Result.ok(dicts);
     }
 
 //    导出为excel
@@ -41,7 +41,7 @@ public class DictController {
     public Result importExcel(MultipartFile file){
         boolean success = dictService.importExcel(file);
         if (success){
-            return Result.success();
+            return Result.ok();
         }
         return Result.fail();
     }

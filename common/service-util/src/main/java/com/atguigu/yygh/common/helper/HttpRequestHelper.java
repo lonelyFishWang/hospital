@@ -23,7 +23,6 @@ public class HttpRequestHelper {
     }
 
     /**
-     *
      * @param paramMap
      * @return
      */
@@ -37,12 +36,13 @@ public class HttpRequestHelper {
 
     /**
      * 请求数据获取签名
+     *
      * @param paramMap
      * @param signKey
      * @return
      */
     public static String getSign(Map<String, Object> paramMap, String signKey) {
-        if(paramMap.containsKey("sign")) {
+        if (paramMap.containsKey("sign")) {
             paramMap.remove("sign");
         }
         TreeMap<String, Object> sorted = new TreeMap<>(paramMap);
@@ -59,14 +59,15 @@ public class HttpRequestHelper {
 
     /**
      * 签名校验
+     *
      * @param paramMap
      * @param signKey
      * @return
      */
     public static boolean isSignEquals(Map<String, Object> paramMap, String signKey) {
-        String sign = (String)paramMap.get("sign");
+        String sign = (String) paramMap.get("sign");
         String md5Str = getSign(paramMap, signKey);
-        if(!sign.equals(md5Str)) {
+        if (!sign.equals(md5Str)) {
             return false;
         }
         return true;
@@ -74,6 +75,7 @@ public class HttpRequestHelper {
 
     /**
      * 获取时间戳
+     *
      * @return
      */
     public static long getTimestamp() {
@@ -82,11 +84,12 @@ public class HttpRequestHelper {
 
     /**
      * 封装同步请求
+     *
      * @param paramMap
      * @param url
      * @return
      */
-    public static JSONObject sendRequest(Map<String, Object> paramMap, String url){
+    public static JSONObject sendRequest(Map<String, Object> paramMap, String url) {
         String result = "";
         try {
             //封装post参数
@@ -97,7 +100,7 @@ public class HttpRequestHelper {
             }
             log.info(String.format("--> 发送请求：post data %1s", postdata));
             byte[] reqData = postdata.toString().getBytes("utf-8");
-            byte[] respdata = HttpUtil.doPost(url,reqData);
+            byte[] respdata = HttpUtil.doPost(url, reqData);
             result = new String(respdata);
             log.info(String.format("--> 应答结果：result data %1s", result));
         } catch (Exception ex) {
