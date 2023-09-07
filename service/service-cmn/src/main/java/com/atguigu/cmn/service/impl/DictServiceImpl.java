@@ -7,11 +7,13 @@ import com.atguigu.cmn.util.ExcelLisoner;
 import com.atguigu.yygh.common.util.RedisUtil;
 import com.atguigu.yygh.model.cmn.Dict;
 import com.atguigu.yygh.vo.cmn.DictEeVo;
+import com.atguigu.yygh.vo.hosp.HospitalQueryVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -81,17 +83,45 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
     }
 
 
-//    导入excle
+    //    导入excle
     @Override
     public boolean importExcel(MultipartFile file) {
-            try {
+        try {
 //                excelLisoner负责解析excel 从file 输入流中拿到excel
-                EasyExcel.read(file.getInputStream(), DictEeVo.class, new ExcelLisoner(dictMapper)).sheet().doRead();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            EasyExcel.read(file.getInputStream(), DictEeVo.class, new ExcelLisoner(dictMapper)).sheet().doRead();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return false;
     }
+
+
+    @Override
+    public String getDictName(String dictCode, String value) {
+
+
+        if (StringUtils.isEmpty(dictCode)) {
+            QueryWrapper<Dict> wrapper = new QueryWrapper<>();
+            wrapper.eq("value", value);
+            Dict dict = baseMapper.selectOne(wrapper);
+            return dict.getName();
+        } else {
+            Dict codeDict = this.getDictByDictCode(dictCode);
+            Long parent_id = codeDict.getId();
+            Dict finalDict = baseMapper.selectOne(new QueryWrapper<Dict>()
+                    .eq("parent_id", parent_id)
+                    .eq("value", value));
+            return finalDict.getName();
+        }
+    }
+
+    private Dict getDictByDictCode(String dictCode) {
+        QueryWrapper<Dict> wrapper = new QueryWrapper<>();
+        wrapper.eq("dict_code", dictCode);
+        Dict dict = dictMapper.selectOne(wrapper);
+        return dict;
+    }
+
 
     //   是否包含子节点
     public boolean whetherChildren(Long id) {

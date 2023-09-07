@@ -2,7 +2,7 @@
 
 #服务器端口
 server:
-  port: 8201
+  port: 8203
 
 #应用名
 spring:
@@ -30,6 +30,11 @@ spring:
       uri: mongodb://192.168.204.129:27017/yygh_hosp
 
       #mapper位置
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.137.139:8848
+
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

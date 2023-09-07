@@ -1,4 +1,4 @@
-package com.atguigu.hosp.controller;
+package com.atguigu.hosp.controller.set;
 
 
 import com.atguigu.common.result.Result;

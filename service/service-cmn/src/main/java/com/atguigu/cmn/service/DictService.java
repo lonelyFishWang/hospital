@@ -1,6 +1,7 @@
 package com.atguigu.cmn.service;
 
 import com.atguigu.yygh.model.cmn.Dict;
+import com.atguigu.yygh.vo.hosp.HospitalQueryVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,4 +17,7 @@ public interface DictService extends IService<Dict> {
     void exprotExcel(HttpServletResponse response);
 
     boolean importExcel(MultipartFile file);
+
+
+    String getDictName(String dictCode, String value);
 }

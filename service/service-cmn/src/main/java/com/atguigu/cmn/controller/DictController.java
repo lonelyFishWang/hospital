@@ -4,6 +4,7 @@ package com.atguigu.cmn.controller;
 import com.atguigu.cmn.service.DictService;
 import com.atguigu.common.result.Result;
 import com.atguigu.yygh.model.cmn.Dict;
+import com.atguigu.yygh.vo.hosp.HospitalQueryVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,4 +46,11 @@ public class DictController {
         }
         return Result.fail();
     }
+
+    @GetMapping("")
+    public String getHospital(@PathVariable("parentDictCode") String parentDictCode, @PathVariable("value") String value){
+
+        return dictService.getDictName(parentDictCode, value);
+    }
+
 }
