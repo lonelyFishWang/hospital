@@ -1,9 +1,9 @@
-package com.atguigu.hosp.controller.api;
+package com.atguigu.yygh.controller.api;
 
 
 import com.atguigu.common.result.Result;
-import com.atguigu.hosp.service.DepartmentService;
-import com.atguigu.hosp.service.HospitalService;
+import com.atguigu.yygh.service.DepartmentService;
+import com.atguigu.yygh.service.HospitalService;
 import com.atguigu.yygh.model.hosp.Hospital;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/hosp/hospital")
@@ -54,10 +55,10 @@ public class HospitalApiController {
     @GetMapping("findHospDetail/{hoscode}")
     public Result item(@PathVariable String hoscode){
 
-        hospitalService.item(hoscode);
+        Map<String, Object> item = hospitalService.item(hoscode);
 
 
-       return  null;
+        return  Result.ok(item);
     }
 
 

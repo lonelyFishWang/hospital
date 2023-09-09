@@ -1,4 +1,4 @@
-package com.atguigu.hosp.service;
+package com.atguigu.yygh.service;
 
 import java.util.Map;
 

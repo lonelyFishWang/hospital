@@ -1,4 +1,4 @@
-package com.atguigu.hosp.controller;
+package com.atguigu.yygh.controller;
 
 
 import org.springframework.web.bind.annotation.RestController;

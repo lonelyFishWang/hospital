@@ -1,9 +1,9 @@
-package com.atguigu.hosp.service.impl;
+package com.atguigu.yygh.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.atguigu.hosp.repository.HospitalRepository;
-import com.atguigu.hosp.repository.ScheduleRepository;
-import com.atguigu.hosp.service.ScheduleService;
+import com.atguigu.yygh.repository.ScheduleRepository;
+import com.atguigu.yygh.repository.HospitalRepository;
+import com.atguigu.yygh.service.ScheduleService;
 import com.atguigu.yygh.model.hosp.Schedule;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

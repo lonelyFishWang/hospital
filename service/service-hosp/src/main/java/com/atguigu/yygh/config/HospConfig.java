@@ -1,4 +1,4 @@
-package com.atguigu.hosp.config;
+package com.atguigu.yygh.config;
 
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;

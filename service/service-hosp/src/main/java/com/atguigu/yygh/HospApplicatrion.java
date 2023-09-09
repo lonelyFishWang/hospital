@@ -1,4 +1,4 @@
-package com.atguigu.hosp;
+package com.atguigu.yygh;
 
 
 import org.mybatis.spring.annotation.MapperScan;
@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 
-@MapperScan(basePackages = "com.atguigu.hosp.mapper")
+@MapperScan(basePackages = "com.atguigu.yygh.mapper")
 @SpringBootApplication
 @EnableDiscoveryClient
 public class HospApplicatrion {

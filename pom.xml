@@ -23,8 +23,10 @@
 
     <groupId>com.atguigu</groupId>
     <artifactId>yygh</artifactId>
-    <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
     <name>yygh</name>
     <description>yygh</description>
 

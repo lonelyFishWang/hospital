@@ -1,14 +1,14 @@
-package com.atguigu.hosp.service.impl;
+package com.atguigu.yygh.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.atguigu.hosp.repository.DepartmentRepository;
-import com.atguigu.hosp.repository.HospitalRepository;
-import com.atguigu.hosp.service.HospitalService;
-import com.atguigu.yygh.CmnClient;
+import com.atguigu.yygh.service.HospitalService;
+import com.atguigu.yygh.repository.HospitalRepository;
+import com.atguigu.yygh.cmn.client.CmnClient;
 import com.atguigu.yygh.model.hosp.BookingRule;
 import com.atguigu.yygh.model.hosp.Hospital;
 import com.atguigu.yygh.vo.hosp.HospitalQueryVo;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +26,7 @@ public class HospitalServiceImpl implements HospitalService {
     private HospitalRepository hospitalRepository;
 
 
-    @Resource
+//    @Autowired
     private CmnClient cmnClient;
 
 
@@ -63,11 +63,8 @@ public class HospitalServiceImpl implements HospitalService {
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matching().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING).withIgnoreCase(true);
         Hospital hospital = new Hospital();
-
         BeanUtils.copyProperties(hospitalQueryVo, hospital);
         Example<Hospital> example = Example.of(hospital, exampleMatcher);
-
-
         Page<Hospital> pageHospital = hospitalRepository.findAll(example, pageable);
 
         pageHospital.getContent().stream().forEach(hosp -> {
@@ -75,7 +72,6 @@ public class HospitalServiceImpl implements HospitalService {
         });
 
         return pageHospital;
-
     }
 
     @Override
@@ -97,6 +93,8 @@ public class HospitalServiceImpl implements HospitalService {
         dictName.setBookingRule(null);
         return result;
     }
+
+
 
 
 

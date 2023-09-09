@@ -1,7 +1,7 @@
-package com.atguigu.hosp.service.impl;
+package com.atguigu.yygh.service.impl;
 
-import com.atguigu.hosp.mapper.HospitalSetMapper;
-import com.atguigu.hosp.service.HospitalSetService;
+import com.atguigu.yygh.mapper.HospitalSetMapper;
+import com.atguigu.yygh.service.HospitalSetService;
 import com.atguigu.yygh.model.hosp.HospitalSet;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

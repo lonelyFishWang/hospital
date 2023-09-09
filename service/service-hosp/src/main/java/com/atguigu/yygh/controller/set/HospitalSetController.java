@@ -1,9 +1,9 @@
-package com.atguigu.hosp.controller.set;
+package com.atguigu.yygh.controller.set;
 
 
 import com.atguigu.common.result.Result;
 import com.atguigu.common.result.ResultCodeEnum;
-import com.atguigu.hosp.service.HospitalSetService;
+import com.atguigu.yygh.service.HospitalSetService;
 import com.atguigu.yygh.common.util.MD5;
 import com.atguigu.yygh.model.hosp.HospitalSet;
 import com.atguigu.yygh.vo.hosp.HospitalSetQueryVo;

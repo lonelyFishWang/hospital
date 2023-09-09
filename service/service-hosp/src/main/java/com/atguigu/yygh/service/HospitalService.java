@@ -1,4 +1,4 @@
-package com.atguigu.hosp.service;
+package com.atguigu.yygh.service;
 
 import com.atguigu.yygh.model.hosp.Hospital;
 import com.atguigu.yygh.vo.hosp.HospitalQueryVo;

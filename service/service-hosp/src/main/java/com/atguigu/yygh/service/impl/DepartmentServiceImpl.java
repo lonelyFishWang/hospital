@@ -1,8 +1,8 @@
-package com.atguigu.hosp.service.impl;
+package com.atguigu.yygh.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.atguigu.hosp.repository.DepartmentRepository;
-import com.atguigu.hosp.service.DepartmentService;
+import com.atguigu.yygh.repository.DepartmentRepository;
+import com.atguigu.yygh.service.DepartmentService;
 import com.atguigu.yygh.model.hosp.Department;
 import com.atguigu.yygh.model.hosp.Hospital;
 import com.atguigu.yygh.vo.hosp.DepartmentQueryVo;

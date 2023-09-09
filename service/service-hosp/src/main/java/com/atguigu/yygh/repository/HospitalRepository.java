@@ -1,4 +1,4 @@
-package com.atguigu.hosp.repository;
+package com.atguigu.yygh.repository;
 
 import com.atguigu.yygh.model.hosp.Hospital;
 import com.atguigu.yygh.model.hosp.Schedule;

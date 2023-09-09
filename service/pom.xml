@@ -3,6 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.atguigu</groupId>
         <artifactId>yygh</artifactId>
@@ -13,6 +14,7 @@
     <artifactId>service</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+
     <modules>
         <module>service-hosp</module>
         <module>service-cmn</module>
@@ -92,17 +94,16 @@
         </dependency>
 
         <!--swagger-->
-        <dependency>
+        <!--<dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-        </dependency>
-
+        </dependency>-->
 
         <!--swagger ui-->
-        <dependency>
+        <!--<dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
 

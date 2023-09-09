@@ -1,7 +1,8 @@
-package com.atguigu.hosp.mapper;
+package com.atguigu.yygh.mapper;
 
 import com.atguigu.yygh.model.hosp.HospitalSet;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
 * @author wangfuyu
@@ -9,6 +10,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2023-08-11 09:47:05
 * @Entity generator.domain.HospitalSet
 */
+
+
+@Mapper
 public interface HospitalSetMapper extends BaseMapper<HospitalSet> {
 
 }

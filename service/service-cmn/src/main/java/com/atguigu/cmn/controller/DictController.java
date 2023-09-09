@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Slf4j
-@CrossOrigin
 @RestController
 @RequestMapping("/admin/cmn/dict")
 public class DictController {
@@ -47,7 +46,7 @@ public class DictController {
         return Result.fail();
     }
 
-    @GetMapping("")
+    @GetMapping("getDictName")
     public String getHospital(@PathVariable("parentDictCode") String parentDictCode, @PathVariable("value") String value){
 
         return dictService.getDictName(parentDictCode, value);

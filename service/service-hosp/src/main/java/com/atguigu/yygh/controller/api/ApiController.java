@@ -1,17 +1,18 @@
-package com.atguigu.hosp.controller.api;
+package com.atguigu.yygh.controller.api;
 
 
 import com.atguigu.common.exception.YyghException;
 import com.atguigu.common.result.Result;
 import com.atguigu.common.result.ResultCodeEnum;
-import com.atguigu.hosp.service.DepartmentService;
-import com.atguigu.hosp.service.HospitalService;
-import com.atguigu.hosp.service.HospitalSetService;
-import com.atguigu.hosp.service.ScheduleService;
+import com.atguigu.yygh.service.DepartmentService;
+import com.atguigu.yygh.service.HospitalService;
+import com.atguigu.yygh.service.HospitalSetService;
+import com.atguigu.yygh.service.ScheduleService;
 import com.atguigu.yygh.common.helper.HttpRequestHelper;
 import com.atguigu.yygh.common.util.MD5;
 import com.atguigu.yygh.model.hosp.Hospital;
 import com.atguigu.yygh.vo.hosp.DepartmentQueryVo;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,10 +21,11 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api/hosp")
 public class ApiController {
+
     @Resource
     private HospitalService hospitalService;
 
@@ -35,6 +37,9 @@ public class ApiController {
 
     @Resource
     private ScheduleService scheduleService;
+
+
+
 
     //    添加医院基本信息
     @PostMapping("/saveHospital")
